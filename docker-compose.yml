@@ -1,0 +1,12 @@
+version: '3.3'
+
+services:
+  db:
+    container_name: english
+    image: postgres:16.2-bullseye
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: english
+    ports:
+      - "5432:5432"

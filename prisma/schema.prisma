@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma/client"
+}
+
+generator nestgraphql {
+  provider           = "prisma-nestjs-graphql"
+  output             = "../generated/prisma/graphql"
+  prismaClientImport = "#/generated/prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int     @id @default(autoincrement())
+  email       String  @unique
+  password    String
+  /// @HideField({ output: true, input: true })
+  isActivated Boolean @default(false)
+  /// @HideField({ output: true, input: true })
+  Token       Token?
+}
+
+model Token {
+  refreshToken String
+  userId       Int    @unique @map("user_id")
+  user         User   @relation(fields: [userId], references: [id])
+}

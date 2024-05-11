@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": ["test", "dist", "**/*spec.ts"],
+  "include": [
+    "src",
+    "src/**/*",
+    "generated",
+    "generated/**/*",
+    "@types",
+    "@types/**/*"
+  ]
+}
